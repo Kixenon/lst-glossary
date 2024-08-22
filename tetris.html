@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 id="tetris"> Tetris Terms </h1>
+
+<p>
+    This section introduces terms that are fundamental to the block stacker game Tetris itself.
+</p>
+
+<h2> Table of Contents </h2>
+<ul>
+    <li><a href="#board"> Board </a></li>
+    <li><a href="#cell"> Cell (Mino) </a></li>
+    <li><a href="#column"> Column </a></li>
+    <li><a href="#piece"> Piece </a></li>
+    <li><a href="#row"> Row (Line) </a></li>
+    <li><a href="#stack"> Stack (Boardstate) </a></li>
+</ul>
+
+<h2 id="board"><a href="#board"> Board </a></h2>
+<p> [Noun, plural: Boards] </p>
+<p>
+    The matrix/grid which constitutes the playing field.
+    A board's dimensions are represented as {w}x{h}, where w is the width and h is the height.
+    By the Tetris guideline standard, a typical board has dimensions 10x40.
+</p>
+
+<h2 id="cell"><a href="#cell"> Cell (Mino) </a></h2>
+<p> [Noun, plural: Cells (Minos)] </p>
+<p>
+    An individual unit of the <a href="#board">board</a>.
+    Can only be in one of two mutually exclusive states: filled or empty.
+</p>
+<h5>
+    A specific cell may be denoted by {<a href="#column">column</a>}, {<a href="#row">row</a>},
+    where the specific cell is the unique intersection between the sets column and row.
+</h5>
+
+<h2 id="column"><a href="#column"> Column (abbr. Col) </a></h2>
+<p> [Noun, plural: Columns (abbr. Cols)] </p>
+<p>
+    The set of <a href="#cell">minos</a> included by a specific vertical lane of the <a href="#board"> board</a>.
+    Columns are numbered from 1 to 10, from left to right.
+    The leftmost column is number 1.
+</p>
+
+<h2 id="piece"><a href="#piece"> Piece </a></h2>
+<p> [Noun, plural: Pieces] </p>
+<p>
+    A set of four filled, homogeneous <a href="#cell">minos</a>, in which each mino is adjacent to at least one other mino.
+    They are also the objects the player controls and can place in Tetris games.
+</p>
+<h5> There are only seven possible pieces: </h5>
+<img src="images/lst-piece.png" alt="all 7 tetris pieces">
+
+<h2 id="row"><a href="#row"> Row (Line) </a></h2>
+<p> [Noun, plural: Rows (Lines)] </p>
+<p>
+    The set of <a href="#cell">minos</a> within a specific horizontal lane of the <a href="#board">board</a>.
+    Rows are numbered from 1 to 20, from bottom to top.
+    The bottom row is number 1.
+</p>
+
+<h2 id="stack"><a href="#stack"> Stack </a></h2>
+<p> [Noun, alt: Boardstate, plural: Stacks (Boardstates)] </p>
+<p>
+    The set of filled <a href="#cell">minos</a> within the <a href="#board">board</a>,
+    taking into account their respective positions.
+</p>
+<p> [Verb, past tense: stacked | present continuous: stacking | present perfect: stacked]</p>
+<p>
+    The action of creating a stack, that is, to place <a href="#piece">pieces</a> onto the <a href="#board">board</a>.
+</p>
+
+
+</body>
+<link rel="stylesheet" href="styles.css">
+</html>
