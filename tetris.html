@@ -24,6 +24,7 @@
         </ul>
     </li>
     <li><a href="#clear"> Clear (Line Clear) </a></li>
+    <li><a href="#column"> Column (abbr. Col) </a></li>
     <li>
         <a href="#hole"> Hole </a>
         <ul>
@@ -31,7 +32,7 @@
             <li><a href="#inaccessible-hole"> Inaccessible Hole</a></li>
         </ul>
     </li>
-    <li><a href="#column"> Column </a></li>
+    <li><a href="#kicktable"> Kicktable (Kick Table)</a></li>
     <li><a href="#overhang"> Overhang </a></li>
     <li>
         <a href="#piece"> Piece </a>
@@ -40,10 +41,25 @@
             <li><a href="#piece-unreachable"> {piece}-unreachable </a></li>
         </ul>
     </li>
+    <li>
+        <a href="#rotation-system"> Rotation System </a>
+        <ul>
+            <li><a href="#srs"> Super Rotation System (SRS) </a></li>
+            <li><a href="#srs+"> Super Rotation System+ (SRS+) </a></li>
+            <li><a href="#nrs"> N*ntendo Rotation System (NRS) </a></li>
+        </ul>
+    </li>
     <li><a href="#row"> Row (Line) </a></li>
     <li><a href="#stack"> Stack (Boardstate) </a></li>
     <li><a href="#surface"> Surface </a></li>
-    <li><a href="#tspin"> T-Spin </a></li>
+    <li>
+        <a href="#tspin"> T-Spin </a>
+        <ul>
+            <li><a href="#3corner"> 3 Corner Rule </a></li>
+            <li><a href="#2corner"> 2 Corner Rule </a></li>
+            <li><a href="#kick-five"> Kick 5 Rule</a></li>
+        </ul>
+    </li>
     <li><a href="#tspin-slot"> T-Spin Slot </a></li>
     <li><a href="#well"> Well </a></li>
 </ul>
@@ -129,6 +145,16 @@
 <p> A hole is an inaccessible hole if it is <a href="#piece">all-piece</a> unreachable hole.</p>
 
 
+<h2 id="kicktable"><a href="#kicktable"> Kicktable (Kick table) </a></h2>
+<p> [Noun, plural: Kicktables (Kick tables)] </p>
+<p>
+    A kicktable is a list of coordinate transformations that are applied to the <a href="#piece">active piece</a> upon rotating.
+    A single coordinate transformation itself is called a 'kick'.
+    A typical implementation of a kicktable is to loop through all kicks linearly and apply them to the active piece, until one of them results in a non-<a href="#obstructed-piece">obstructed pice</a>.
+    If none are successful, then the rotation is aborted.
+</p>
+
+
 <h2 id="overhang"><a href="#overhang"> Overhang </a></h2>
 <p> [Noun, plural: overhangs] </p>
 <p>
@@ -151,22 +177,37 @@
     <li id="active-piece"> Active (piece): true if the piece can be controlled or placed by the player, and can be affected by gravity.</li>
     <li> Any-piece: true if any of the 7 piece fulfills an underlying condition. </li>
     <li> All-piece(s): true if and only if all 7 pieces fulfill an underlying condition. </li>
+    <li id="obstructed-piece"> Obstructed (piece): true if any of the 4 minos of the piece are in the same position as other filled minos on the <a href="#board">board</a>.</li>
 </ul>
 
 <h3 id="piece-reachable"><a href="#piece-reachable"> {piece}-reachable </a></h3>
 <p> [Adj., usage: {piece}-reachable <a href="#cell">mino</a>, boolean] </p>
 <p>
     A mino is {piece}-reachable if the mino can be filled by an <a href="#active-piece">active piece</a> of type {piece}.
-    The definition is dependent on the implied rotation system and kicktable.
-    <!--/> TODO: Define kicktable </!-->
+    The definition is dependent on the implied <a href="#rotation-system">rotation system</a> and <a href="#kicktable">kicktable</a>.
 </p>
 
 <h3 id="piece-unreachable"><a href="#piece-unreachable"> {piece}-unreachable </a></h3>
 <p> [Adj., usage: {piece}-unreachable <a href="#cell">mino</a>, boolean] </p>
 <p>
     A mino is {piece}-unreachable if the mino cannot be filled by an <a href="#active-piece">active piece</a> of type {piece}.
-    The definition is dependent on the implied rotation system and kicktable.
+    The definition is dependent on the implied <a href="#rotation-system">rotation system</a> and <a href="#kicktable">kicktable</a>.
 </p>
+
+
+<h2 id="rotation-system"><a href="#rotation-system"> Rotation System </a></h2>
+<p> [Noun, plural: Rotation Systems] </p>
+<p>
+    The system in which each active piece undergoes rotation.
+    A rotation system may define a <a href="#kicktable">kicktable</a>.
+</p>
+<p> There are many rotation systems: </p>
+<ul>
+    <li id="srs"> Super Rotation System (SRS) - the rotation system defined by the modern Tetris guideline standard. </li>
+    <li id="srs+"> Super Rotation System+ (TETR.IO) (SRS+) - a modified version of the SRS, made for TETR.IO.</li>
+    <li id="nrs"> N*ntendo Rotation System (NRS) - the rotation system used on the NES version of Tetris. </li>
+    <li> And many more...</li>
+</ul>
 
 
 <h2 id="row"><a href="#row"> Row (Line) </a></h2>
@@ -208,11 +249,36 @@
     and satisfy the following:
 </p>
 <ul>
-    <li> 3 corner rule </li> <!--/> TODO: detail </!-->
-    <li> 2 corner rule </li>
-    <li> Kick 5 rule </li>
+    <li><a href="#3corner"> 3 corner rule </a></li> <!--/> TODO: detail </!-->
+    <li><a href="#2corner"> 2 corner rule, or </a></li>
+    <li><a href="#kick-five"> Kick 5 rule </a></li>
 </ul>
-<h5> If a T-Spin does not satisfy the last 2 rules, then it is called a T-Spin mini.</h5>
+<img src="images/3corner/fig_1.png" alt="image of 3 corner" id="3corner">
+<p>
+    Fig 1.1: Both T <a href="#piece">pieces</a> have been spun into place, and the red <a href="#cell">minos</a> are filled,
+    satisfying the first condition.
+</p>
+<img src="images/2corner/fig_1_2.png" alt="image of 2corner" id="2corner">
+<p>
+    Fig 1.2: This Tspin in particular has 2 of its 'inner' corners filled, satisfying the second condition.
+</p>
+<img src="images/2corner/fig_1_1.png" alt="image of fin failing 2corner">
+<p>
+    Fig 1.3: This Tspin does not satisfy the 2 corner rule, but see Fig 1.4.
+</p>
+<img src="images/kick5/fin1.png" alt="fin1" id="kick-five">
+<img src="images/kick5/fin2.png" alt="fin2">
+<img src="images/kick5/zdiag.png" alt="kick demonstration">
+<p>
+    Fig 1.4: Before and after rotation.
+    <br>
+    Despite this Tspin failing the 2 corner rule, the last rotation executed kicked the piece 1 left and 2 down.
+    This kick is dubbed "kick five", and this validates this spin as a Tspin by the kick 5 rule.
+    Such a Tspin is dubbed a "Fin". (E.g., Fin TSS, Fin TSD).
+    Please note that Fins are exclusive to the <a href="#srs">SRS</a> and related family of kicktables, as such a 'kick five' may not exist in other systems.
+</p>
+
+<h5> If a T-Spin does not satisfy any of the last 2 rules, then it is called a T-Spin mini.</h5>
 <p> The amount of lines cleared may be appended for additional detail: </p>
 <ul>
     <li> 0 lines - T-Spin (Mini) Null (TS0 [TSM0]) </li>
