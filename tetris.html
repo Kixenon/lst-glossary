@@ -12,7 +12,7 @@
     This section introduces terms that are fundamental to the block stacker game Tetris itself.
 </p>
 
-<h2> Table of Contents </h2>
+<h2> Table of Contents (Oudated) </h2>
 <ul>
     <li><a href="#board"> Board </a></li>
     <li><a href="#cell"> Cell (Mino) </a></li>
@@ -22,6 +22,7 @@
     <li><a href="#stack"> Stack (Boardstate) </a></li>
 </ul>
 
+
 <h2 id="board"><a href="#board"> Board </a></h2>
 <p> [Noun, plural: Boards] </p>
 <p>
@@ -29,6 +30,7 @@
     A board's dimensions are represented as {w}x{h}, where w is the width and h is the height.
     By the Tetris guideline standard, a typical board has dimensions 10x40.
 </p>
+
 
 <h2 id="cell"><a href="#cell"> Cell (Mino) </a></h2>
 <p> [Noun, plural: Cells (Minos)] </p>
@@ -41,6 +43,33 @@
     where the specific cell is the unique intersection between the sets column and row.
 </h5>
 
+<h3 id="perfect-empty-cell"><a href="#perfect-empty-cell"> Perfect Empty Cell/Mino </a></h3>
+<p> [Noun, plural: Perfect Empty Cells] </p>
+<p>
+    An empty mino that has no other empty minos in its <a href="#row">row</a>.
+</p>
+
+
+<h2 id="clear"><a href="#clear"> Clear </a></h2>
+<p> [Noun, alt: Line Clear, plural: Clears (Line Clears)] </p>
+<p>
+    A fully filled <a href="#row">row</a> of <a href="#cell">minos</a> in a <a href="#board">board</a>,
+    causing the row to empty.
+    All minos above the emptied row shifts down by one row.
+</p>
+<p> [Verb, past tense: cleared | present continuous: clearing | present perfect: cleared]</p>
+<p>
+    The action of causing a <a href="#row">row</a> to be a clear, that is, to place pieces in a way that fills entire rows.
+</p>
+<h5> A clear may be classified by how many rows are filled simultaneously with one piece: </h5>
+<ul>
+    <li> 1 row - Single </li>
+    <li> 2 rows - Double </li>
+    <li> 3 rows - Triple </li>
+    <li> 4 rows - Quad </li>
+</ul>
+
+
 <h2 id="column"><a href="#column"> Column (abbr. Col) </a></h2>
 <p> [Noun, plural: Columns (abbr. Cols)] </p>
 <p>
@@ -48,6 +77,33 @@
     Columns are numbered from 1 to 10, from left to right.
     The leftmost column is number 1.
 </p>
+
+
+<h2 id="hole"><a href="#hole"> Hole </a></h2>
+<p> [Noun, plural: Holes] </p>
+<p>
+    An empty <a href="#cell">mino</a> with a filled mino above it in the same <a href="#column">column</a>.
+</p>
+<p>
+    An empty mino below the <a href="#surface">surface</a>.
+</p>
+
+<h3 id="accessible-hole"><a href="#accessible-hole"> Accessible Hole </a></h3>
+<p> [Noun, plural: Accessible Holes] </p>
+<p> A hole is an accessible hole if it is <a href="#piece">any-piece</a> reachable hole.</p>
+
+<h3 id="inaccessible-hole"><a href="#inaccessible-hole"> Inaccessible Hole </a></h3>
+<p> [Noun, plural: Inaccessible Holes] </p>
+<p> A hole is an inaccessible hole if it is <a href="#piece">all-piece</a> unreachable hole.</p>
+
+
+<h2 id="overhang"><a href="#overhang"> Overhang </a></h2>
+<p> [Noun, plural: overhangs] </p>
+<p>
+    A filled <a href="#cell">mino</a> directly above,
+    and within the same <a href="#column">column</a> as an <a href="#accessible-hole">accessible hole</a>.
+</p>
+
 
 <h2 id="piece"><a href="#piece"> Piece </a></h2>
 <p> [Noun, plural: Pieces] </p>
@@ -57,6 +113,14 @@
 </p>
 <h5> There are only seven possible pieces: </h5>
 <img src="images/tetris/piece.png" alt="all 7 tetris pieces">
+<blockquote><p> Image by Fel </p></blockquote>
+<h5> Related booleans: </h5>
+<ul>
+    <li> Active (piece): true if the piece can be controlled or placed by the player, and can be affected by gravity.</li>
+    <li> Any-piece: true if any of the 7 piece fulfills an underlying condition. </li>
+    <li> All-piece(s): true if and only if all 7 pieces fulfill an underlying condition. </li>
+</ul>
+
 
 <h2 id="row"><a href="#row"> Row (Line) </a></h2>
 <p> [Noun, plural: Rows (Lines)] </p>
@@ -65,6 +129,7 @@
     Rows are numbered from 1 to 20, from bottom to top.
     The bottom row is number 1.
 </p>
+
 
 <h2 id="stack"><a href="#stack"> Stack </a></h2>
 <p> [Noun, alt: Boardstate, plural: Stacks (Boardstates)] </p>
@@ -77,6 +142,66 @@
     The action of creating a stack, that is, to place <a href="#piece">pieces</a> onto the <a href="#board">board</a>.
 </p>
 
+
+<h2 id="surface"><a href="#surface"> Surface </a></h2>
+<p> [Noun, plural: Surface] </p>
+<p>
+    The set which contains the highest filled <a href="#cell">mino</a> of each <a href="#column">column</a> of the <a href="#board">board</a>.
+</p>
+<p> [Adj, usage: surface <a href="#cell">cell/mino</a>] </p>
+<p>
+    A mino that is part of the surface minos set.
+</p>
+
+
+<h2 id="tspin"><a href="#tspin"> T-Spin (Tspin) </a></h2>
+<p> [Noun, plural: T-Spins (Tspins)]</p>
+<p>
+    A <a href="#clear">line clear</a> using a T <a href="#piece">piece</a> where the last action was a rotation,
+    and satisfy the following:
+</p>
+<ul>
+    <li> 3 corner rule </li> <!--/> TODO: detail </!-->
+    <li> 2 corner rule </li>
+    <li> Kick 5 rule </li>
+</ul>
+<h5> If a T-Spin does not satisfy the last 2 rules, then it is called a T-Spin mini.</h5>
+<p> The amount of lines cleared may be appended for additional detail: </p>
+<ul>
+    <li> 0 lines - T-Spin (Mini) Null (TS[M]0) </li>
+    <li> 1 line - T-Spin (Mini) Single (TS[M]S) </li>
+    <li> 2 lines - T-Spin (Mini) Double (TS[M]D) </li>
+    <li> 3 lines - T-Spin Triple (TST) </li>
+</ul>
+<h5> A Tspin triple mini is not possible. </h5>
+
+
+<h2 id="tspin-slot"><a href="#tspin-slot"> Tspin slot </a></h2>
+<p> [Noun, plural: Tspin slots] </p>
+<p>
+    An empty T-reachable T-shape that can result in a <a href="#tspin">Tspin</a> if filled by a T.
+</p>
+
+
+<h2 id="well"><a href="#well"> Well </a></h2>
+<p> [Noun, plural: Wells] </p>
+<p>
+    The set that includes the lowest above<a href="#surface">-surface</a> <a href="#perfect-empty-cell">perfect empty mino</a>
+    and all other perfect empty minos vertically above.
+    A <a href="#board">board</a> either has one well or no well at all.
+</p>
+<p>
+    A well may be denoted by:
+</p>
+<ul>
+    <li> Column {col} (well), where col is the <a href="#column">column</a> the well appears in. </li>
+    <li> {X}-{Y}, where X is the number of columns to the left of the well and Y is the number of columns to the right. </li>
+</ul>
+<p>
+    For example: Column 7 well is the same as saying 6-3.
+    In cases where X is smaller than Y, the {Y}-{X} naming may be used.
+    However, to avoid ambiguity, it is best to use {X}-{Y} naming. (E.g., 7-2 may be used to refer to the 2-7 well)
+</p>
 
 </body>
 <link rel="stylesheet" href="styles.css">
