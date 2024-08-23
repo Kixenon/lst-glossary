@@ -13,14 +13,39 @@
     This section introduces terms that are fundamental to the block stacker game Tetris itself.
 </p>
 
-<h2> Table of Contents (Oudated) </h2>
+<h2> Table of Contents </h2>
 <ul>
     <li><a href="#board"> Board </a></li>
-    <li><a href="#cell"> Cell (Mino) </a></li>
+    <li>
+        <a href="#cell"> Cell (Mino) </a>
+        <ul>
+            <li><a href="#perfect-empty-cell"> Perfect Empty Cell/Mino </a></li>
+            <li><a href="#cell-shape"> {term}-shape </a></li>
+        </ul>
+    </li>
+    <li><a href="#clear"> Clear (Line Clear) </a></li>
+    <li>
+        <a href="#hole"> Hole </a>
+        <ul>
+            <li><a href="#accessible-hole"> Accessible Hole </a></li>
+            <li><a href="#inaccessible-hole"> Inaccessible Hole</a></li>
+        </ul>
+    </li>
     <li><a href="#column"> Column </a></li>
-    <li><a href="#piece"> Piece </a></li>
+    <li><a href="#overhang"> Overhang </a></li>
+    <li>
+        <a href="#piece"> Piece </a>
+        <ul>
+            <li><a href="#piece-reachable"> {piece}-reachable </a></li>
+            <li><a href="#piece-unreachable"> {piece}-unreachable </a></li>
+        </ul>
+    </li>
     <li><a href="#row"> Row (Line) </a></li>
     <li><a href="#stack"> Stack (Boardstate) </a></li>
+    <li><a href="#surface"> Surface </a></li>
+    <li><a href="#tspin"> T-Spin </a></li>
+    <li><a href="#tspin-slot"> T-Spin Slot </a></li>
+    <li><a href="#well"> Well </a></li>
 </ul>
 
 
@@ -48,6 +73,12 @@
 <p> [Noun, plural: Perfect Empty Cells] </p>
 <p>
     An empty mino that has no other empty minos in its <a href="#row">row</a>.
+</p>
+
+<h3 id="cell-shape"><a href="#cell-shape"> {term}-shape </a></h3>
+<p> [Noun, plural: {term}-shapes] </p>
+<p>
+    A set of minos that form the shape of {term}.
 </p>
 
 
@@ -115,12 +146,27 @@
 <h5> There are only seven possible pieces: </h5>
 <img src="images/tetris/piece.png" alt="all 7 tetris pieces">
 <blockquote><p> Image by Fel </p></blockquote>
-<h5> Related booleans: </h5>
+<h5> Related descriptors: </h5>
 <ul>
-    <li> Active (piece): true if the piece can be controlled or placed by the player, and can be affected by gravity.</li>
+    <li id="active-piece"> Active (piece): true if the piece can be controlled or placed by the player, and can be affected by gravity.</li>
     <li> Any-piece: true if any of the 7 piece fulfills an underlying condition. </li>
     <li> All-piece(s): true if and only if all 7 pieces fulfill an underlying condition. </li>
 </ul>
+
+<h3 id="piece-reachable"><a href="#piece-reachable"> {piece}-reachable </a></h3>
+<p> [Adj., usage: {piece}-reachable <a href="#cell">mino</a>, boolean] </p>
+<p>
+    A mino is {piece}-reachable if the mino can be filled by an <a href="#active-piece">active piece</a> of type {piece}.
+    The definition is dependent on the implied rotation system and kicktable.
+    <!--/> TODO: Define kicktable </!-->
+</p>
+
+<h3 id="piece-unreachable"><a href="#piece-unreachable"> {piece}-unreachable </a></h3>
+<p> [Adj., usage: {piece}-unreachable <a href="#cell">mino</a>, boolean] </p>
+<p>
+    A mino is {piece}-unreachable if the mino cannot be filled by an <a href="#active-piece">active piece</a> of type {piece}.
+    The definition is dependent on the implied rotation system and kicktable.
+</p>
 
 
 <h2 id="row"><a href="#row"> Row (Line) </a></h2>
@@ -149,7 +195,7 @@
 <p>
     The set which contains the highest filled <a href="#cell">mino</a> of each <a href="#column">column</a> of the <a href="#board">board</a>.
 </p>
-<p> [Adj, usage: surface <a href="#cell">cell/mino</a>] </p>
+<p> [Adj., usage: surface <a href="#cell">cell/mino</a>] </p>
 <p>
     A mino that is part of the surface minos set.
 </p>
@@ -169,9 +215,9 @@
 <h5> If a T-Spin does not satisfy the last 2 rules, then it is called a T-Spin mini.</h5>
 <p> The amount of lines cleared may be appended for additional detail: </p>
 <ul>
-    <li> 0 lines - T-Spin (Mini) Null (TS[M]0) </li>
-    <li> 1 line - T-Spin (Mini) Single (TS[M]S) </li>
-    <li> 2 lines - T-Spin (Mini) Double (TS[M]D) </li>
+    <li> 0 lines - T-Spin (Mini) Null (TS0 [TSM0]) </li>
+    <li> 1 line - T-Spin (Mini) Single (TSS [TSMS]) </li>
+    <li> 2 lines - T-Spin (Mini) Double (TSD [TSMD]) </li>
     <li> 3 lines - T-Spin Triple (TST) </li>
 </ul>
 <h5> A Tspin triple mini is not possible. </h5>
